@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Post } from '../shared/post.model';
 
 @Component({
@@ -18,7 +18,16 @@ export class PostFormReactiveComponent implements OnInit {
 
   submitted = false;
 
-  constructor(private fb: FormBuilder) { }
+  postForm: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.postForm = fb.group({
+      title: fb.control(this.model.title, Validators.required),
+      text: fb.control(this.model.text, Validators.required),
+      category: fb.control(this.model.category),
+      tag: fb.control(this.model.tag)
+    });
+  }
 
   ngOnInit() {
   }
