@@ -8,6 +8,8 @@ import { Post } from '../shared/post.model';
   styleUrls: ['./post-form-reactive.component.css']
 })
 export class PostFormReactiveComponent implements OnInit {
+  START_TITLE = 'Title: ';
+
   categories = [ 'Category 1', 'Category 2', 'Category 3', 'Category 4', 'Category 5' ];
 
   model = new Post(1,
@@ -22,7 +24,7 @@ export class PostFormReactiveComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.postForm = fb.group({
-      title: fb.control(this.model.title, Validators.compose([ Validators.required, Validators.minLength(5) ])),
+      title: fb.control(this.model.title, Validators.compose([ Validators.required, this.titleValidator ])),
       text: fb.control(this.model.text, Validators.required),
       category: fb.control(this.model.category),
       tag: fb.control(this.model.tag)
@@ -38,4 +40,10 @@ export class PostFormReactiveComponent implements OnInit {
   }
 
   isValid = (field: FormControl) => field.valid || field.pristine;
+
+  titleValidator = (control: FormControl): { [ s: string ]: boolean } => {
+    if (control.value.substring(0, this.START_TITLE.length) !== this.START_TITLE) {
+      return { invalidTitle: true };
+    }
+  }
 }
