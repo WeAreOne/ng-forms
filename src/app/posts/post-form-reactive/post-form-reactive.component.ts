@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Post } from '../shared/post.model';
 
 @Component({
@@ -33,4 +33,5 @@ export class PostFormReactiveComponent implements OnInit {
   }
 
   onSubmit() { this.submitted = true; }
+  isValid = (field: FormControl) => field.valid || field.pristine;
 }
