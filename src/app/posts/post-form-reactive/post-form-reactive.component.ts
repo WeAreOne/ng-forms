@@ -22,7 +22,7 @@ export class PostFormReactiveComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.postForm = fb.group({
-      title: fb.control(this.model.title, Validators.required),
+      title: fb.control(this.model.title, Validators.compose([ Validators.required, Validators.minLength(5) ])),
       text: fb.control(this.model.text, Validators.required),
       category: fb.control(this.model.category),
       tag: fb.control(this.model.tag)
