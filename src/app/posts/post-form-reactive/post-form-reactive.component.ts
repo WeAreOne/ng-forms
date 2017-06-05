@@ -32,6 +32,10 @@ export class PostFormReactiveComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit() { this.submitted = true; }
+  onSubmit(formValue) {
+    Object.assign(this.model, this.model, formValue);
+    this.submitted = true;
+  }
+
   isValid = (field: FormControl) => field.valid || field.pristine;
 }
