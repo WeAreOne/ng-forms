@@ -22,6 +22,8 @@ export class PostFormComponent implements OnInit {
   ngOnInit() {
   }
 
+  isValid = (field) => field.valid || field.pristine;
+
   onSubmit() { this.submitted = true; }
 
   // Only for testing
